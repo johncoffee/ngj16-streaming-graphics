@@ -32,12 +32,13 @@ angular.module('app').component('deadline', {
         template: `<span class="__deadline-time"></span>`,
         controller: function () {
             const updateMS = 1000;
-            var t1 = moment(new Date("2016-04-10T12:30:00.000Z"));
+            var deadline = moment(new Date("2016-04-10T12:30:00.000Z"));
             var handle;
             var elem;
 
             this.$onInit = function () {
                 elem = document.querySelector(".__deadline-time");
+                onInterval();
                 handle = setInterval(onInterval, updateMS);
             };
 
@@ -46,12 +47,11 @@ angular.module('app').component('deadline', {
             };
 
             function onInterval() {
-                const text = calc();
+                const text = formatHoursMinutesSeconds(new Date(), deadline);
                 elem.innerHTML = text;
             }
 
-            function calc() {
-                var t0 = new Date();
+            function formatHoursMinutesSeconds(t0, t1) {
                 var dur = moment.duration().add( t1 - t0, "millisecond");
                 if (t1 > t0) {
                     var hours = Math.floor(dur.asHours());
