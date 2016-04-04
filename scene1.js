@@ -1,29 +1,17 @@
 angular
     .module('app', ['ngMaterial'])
-    .config(function($mdThemingProvider){
+    .config(function($mdThemingProvider, $compileProvider){
         $mdThemingProvider.theme('default')
-            .primaryPalette('blue')
-            .accentPalette('red');
+            .primaryPalette('teal')
+            .accentPalette('orange');
+
+        $compileProvider.debugInfoEnabled(false);
     });
 
 angular.module('app').component('upNext', {
-        template: `<div layout="row">
-    <div flex="30">
-        Up next   
-    </div>
-    <div flex="70">
-        <input ng-model="$ctrl.upNext">    
-    </div>
-</div>`,
-        controller: function (Storage) {
-            Object.defineProperty(this, 'upNext', {
-                get: function () {
-                    return localStorage.upNext;
-                },
-                set: function (value) {
-                    localStorage.upNext = value;
-                }
-            })
+        template: `<span ng-bind="$ctrl.text"></span>`,
+        controller: function () {
+            this.text = "Weird shit that looks cool, and more...";
         }
     }
 );

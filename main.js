@@ -47,7 +47,7 @@ angular.module('app').component('openScene', {
         Open the scene
     </div>
     <div flex="70">
-        <button ng-click="$ctrl.open()" class="md-button">open!</button>       
+        <button ng-click="$ctrl.open()" class="md-button md-primary">open!</button>       
     </div>
 </div>`,
         controller: function (Storage, $window) {
