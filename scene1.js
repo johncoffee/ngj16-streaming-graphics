@@ -32,7 +32,7 @@ angular.module('app').component('deadline', {
         template: `<span class="__deadline-time"></span>`,
         controller: function () {
             const updateMS = 1000;
-            var deadline = moment(new Date("2016-04-10T12:30:00.000Z"));
+            var deadline = moment(new Date("2016-04-10T14:00:00.0200")); // danish local time
             var handle;
             var elem;
 
