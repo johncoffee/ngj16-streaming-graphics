@@ -4,34 +4,30 @@
 <meta charset="UTF-8">
 <title>main</title>
 <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+<link rel="stylesheet" href="fonts/stylesheet.css">
 <style>
-    html {
-        /*background: #225378;*/
-    }
     html, body {
-        /*height: 100%;*/
-        background: #225378;
         background-color: #0f0;
     }
     body {
         margin: 0;
+        font-family: texgyreadventorregular;
     }
+    ._bold {
+        font-family: texgyreadventorbold;
+    }
+
     .box-bottom {
         position: fixed;
         width: 100%;
         bottom: 0;
         background: #fff;
     }
-    .box-bottom .left {
-        height: 12rem;
-    }
-    .box-bottom .center {
-        height: 12rem;
-    }
+    .box-bottom .left,
+    .box-bottom .center,
     .box-bottom .right {
-        height: 12rem;
+        height: 10rem;
     }
-
 
     .box-top {
         position: fixed;
@@ -39,7 +35,7 @@
         top: 0;
         color: #fff;
         font-weight:bold;
-        font-size: 2rem;
+        font-size: 1.5rem;
         height: 2rem;
     }
     .box-top .left {
@@ -61,7 +57,11 @@
 
     .box-attention {
         min-height: 0.5rem;
-        background: orange;
+        background: #E88100;
+    }
+    .box-attention .box-attention-text {
+        padding: .5rem 1rem;
+        color: #fff;
     }
 
     .triangle-up:first-child {
@@ -83,7 +83,9 @@
 
 <div class="box-top">
     <div layout="row">
-        <div flex="30" class="left">UP NEXT:</div>
+        <div flex="30" class="left _bold">
+            UP NEXT:
+        </div>
         <div flex="60" class="center">
             <div layout="row" layout-align="center center">
                 <div flex class="triangle-up"></div>
@@ -100,20 +102,32 @@
 
 <div class="box-bottom">
     <div class="box-attention">
-        <div class="hide">Interview with Mr. Balls</div>
+        <div class="box-attention-text _bold">
+            Names and stuff
+        </div>
     </div>
     <div layout="row">
         <div flex="30" class="left">
             <div layout="row" layout-align=" center center">
-                <div flex>
+                <div flex style="padding: 0 1rem;">
                     <!--images here...-->
-                    <div style="height: 11rem; width: 100%;
-                    background: transparent url(images/IGDADKBanner.png)center center no-repeat; background-size: contain"></div>
+                    <div style="height: 11rem;
+                    width: 100%;
+                    background: transparent url(sponsors/IGDADKBanner.png) center center no-repeat;
+                    background-size: contain
+                    "></div>
                 </div>
             </div>
         </div>
         <div flex="60" class="center">
-            Logo
+            <div layout="row" layout-align="center center">
+                <div flex>
+                    <div style="height: 10rem;
+                        width: 100%;
+                        background: transparent url(image/ngjlogo.png) no-repeat scroll center center / 16rem auto;
+                    "></div>
+                </div>
+            </div>
         </div>
         <div flex="30" class="right">
             Twitter feed
