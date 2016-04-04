@@ -2,48 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>main</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
 </head>
-<style>
-    html {
-        background: #0f0;
-        font: 16px normal sans-serif;
-    }
+<body ng-app="app">
 
-    html, body {
-        height: 100%;
-    }
-    body {
-        margin: 0;
-    }
-    .box-bottom {
-        position: fixed;
-        height: 10rem;
-        width: 100%;
-        bottom: 0;
-        background: #fff;
-    }
-    .box-top {
-        position: fixed;
-        height: 10rem;
-        width: 100%;
-        top: 0;
-        background: #fff;
-    }
-</style>
+<up-next></up-next>
 
+<open-scene></open-scene>
 
-<body>
-
-<div class="box-top">
-    Up next
-</div>
-
-
-
-<div class="box-bottom">
-    42:00:00
-</div>
-
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
