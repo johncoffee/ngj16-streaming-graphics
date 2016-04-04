@@ -27,3 +27,54 @@ angular.module('app').component('upNext', {
         }
     }
 );
+
+angular.module('app').component('deadline', {
+        template: `<span class="__deadline-time"></span>`,
+        controller: function () {
+            const updateMS = 1000;
+            var t1 = moment(new Date("2016-04-10T12:30:00.000Z"));
+            var handle;
+            var elem;
+
+            this.$onInit = function () {
+                elem = document.querySelector(".__deadline-time");
+                handle = setInterval(onInterval, updateMS);
+            };
+
+            this.$onDestroy = function () {
+                clearInterval(handle);
+            };
+
+            function onInterval() {
+                const text = calc();
+                console.debug(text);
+                elem.innerHTML = text;
+            }
+
+            function calc() {
+                var t0 = new Date();
+                var dur = moment.duration().add( t1 - t0, "millisecond");
+                if (t1 > t0) {
+                    var hours = Math.floor(dur.asHours());
+                    if (hours < 10) {
+                        hours = '0' + hours.toString();
+                    }
+                    var minutes = dur.minutes();
+                    if (minutes < 10) {
+                        minutes = '0' + minutes.toString();
+                    }
+                    var seconds = dur.seconds();
+                    if (seconds < 10) {
+                        seconds = '0' + seconds.toString();
+                    }
+                    return hours + ":" + minutes + ":" + seconds;
+                }
+                else {
+                    clearInterval(handle);
+                    return "00:00:00";
+                }
+            }
+        }
+    }
+);
+

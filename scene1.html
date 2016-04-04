@@ -79,7 +79,7 @@
 </style>
 </head>
 
-<body>
+<body ng-app="app">
 
 <div class="box-top">
     <div layout="row">
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div flex="30" class="right">
-            13:37:00
+            <deadline></deadline>
         </div>
     </div>
 </div>
@@ -110,12 +110,7 @@
         <div flex="30" class="left">
             <div layout="row" layout-align=" center center">
                 <div flex style="padding: 0 1rem;">
-                    <!--images here...-->
-                    <div style="height: 11rem;
-                    width: 100%;
-                    background: transparent url(sponsors/IGDADKBanner.png) center center no-repeat;
-                    background-size: contain
-                    "></div>
+                    <sponsors></sponsors>
                 </div>
             </div>
         </div>
@@ -138,14 +133,16 @@
 
 
 
-
+<!--libraries-->
+<script src="bower_components/moment/moment.js"></script>
 
 <!--frameverks-->
-
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-material/angular-material.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
+
+
 <script src="scene1.js"></script>
 </body>
 </html>
