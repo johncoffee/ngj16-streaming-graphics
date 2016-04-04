@@ -47,7 +47,6 @@ angular.module('app').component('deadline', {
 
             function onInterval() {
                 const text = calc();
-                console.debug(text);
                 elem.innerHTML = text;
             }
 
@@ -78,3 +77,45 @@ angular.module('app').component('deadline', {
     }
 );
 
+angular.module('app').component('sponsors', {
+        template: `<div class="__sponsors" style="height: 11rem;
+                    width: 100%;
+                    background: transparent url(sponsors/IGDADKBanner.png) center center no-repeat;
+                    background-size: contain
+                    "></div>`,
+        controller: function () {
+            const updateMS = 5000;
+            var handle;
+            var elem;
+            const images = [
+                'sponsors/IGDADKBanner.png',
+                'sponsors/DanskeSpil.png',
+                'sponsors/Houdini_black_color.png',
+                'sponsors/IOI_logotype_black_TM.png',
+                'sponsors/NordicGame2016.png',
+                'sponsors/SideFX_black_color.png',
+                'sponsors/AAU_Line_Blue.png'
+            ];
+            var index = 0;
+
+            this.$onInit = function () {
+                elem = document.querySelector(".__sponsors");
+                onInterval();
+                handle = setInterval(onInterval, updateMS);
+            };
+
+            this.$onDestroy = function () {
+                clearInterval(handle);
+            };
+
+            function onInterval() {
+                if (index >= images.length) {
+                    index = 0;
+                }
+                var file = images[index];
+                elem.style.backgroundImage = `url("${file}")`;
+                index += 1;
+            }
+        }
+    }
+);
