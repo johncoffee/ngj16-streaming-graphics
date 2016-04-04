@@ -12,7 +12,7 @@ angular.module('app').component('upNext', {
         Up next   
     </div>
     <div flex="70">
-        <input ng-model="$ctrl.upNext">    
+        <input ng-model="$ctrl.upNext" ng-model-options="{debounce: 3000}">    
     </div>
 </div>`,
         controller: function (Storage) {
@@ -22,6 +22,15 @@ angular.module('app').component('upNext', {
                 },
                 set: function (value) {
                     localStorage.upNext = value;
+                    if (Storage.sceneRef) {
+                        Storage.sceneRef.postMessage({
+                            type: "upNext",
+                            text: this.upNext,
+                        }, location + 'scene1.html');
+                    }
+                    else {
+                        console.info("scene not open?");
+                    }
                 }
             })
         }

@@ -9,9 +9,23 @@ angular
     });
 
 angular.module('app').component('upNext', {
-        template: `<span ng-bind="$ctrl.text"></span>`,
-        controller: function () {
-            this.text = "Weird shit that looks cool, and more...";
+        template: `<span class="__upnext-text">
+                    Weird shit that looks cool, and more...
+                    </span>`,
+        controller: function ($window) {
+            this.$onInit = function () {
+                $window.addEventListener("message", receiveMessage, false);
+                console.log("is subscribed...");
+            };
+
+            function receiveMessage(event) {
+                console.log("wat", event.data);
+                if (event.data && event.data.type === "upNext") {
+                    document.querySelector(".__upnext-text").innerHTML = event.data.text;    
+                }
+            }
+
+            this.text = "";
         }
     }
 );
