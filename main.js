@@ -12,7 +12,8 @@ angular.module('app').component('upNext', {
         Up next   
     </div>
     <div flex="70">
-        <input ng-model="$ctrl.upNext" ng-model-options="{debounce: 3000}">    
+        <input ng-model="upNext">   
+        <button class="md-button" ng-click="$ctrl.upNext = upNext">Apply</button>
     </div>
 </div>`,
         controller: function (Storage) {
@@ -43,7 +44,8 @@ angular.module('app').component('attention', {
         Attention   
     </div>
     <div flex="70">
-        <input ng-model="$ctrl.attention" ng-model-options="{debounce: 3000}" size="45">    
+        <input ng-model="attention" size="45">
+        <button class="md-button" ng-click="$ctrl.attention = attention">Apply</button>
     </div>
 </div>`,
         controller: function (Storage) {
@@ -74,7 +76,9 @@ angular.module('app').component('deadline', {
         Deadline    
     </div>
     <div flex="70">
-        <input type="text" ng-model="$ctrl.deadline" ng-model-options="{debounce: 3000}" size="30"> format: <code>2016-04-02T14:00:00.0200</code>    
+        <input type="text" ng-model="deadline" size="30">
+        <button class="md-button" ng-click="$ctrl.deadline = deadline">Apply</button><br>
+        <code>2016-04-02T14:00:00.0200</code>    
     </div>
 </div>`,
         controller: function (Storage) {
@@ -130,8 +134,12 @@ angular.module('app').component('openScene', {
 </div>`,
         controller: function (Storage, $window) {
             this.open = function () {
-                var ref = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank');
-                Storage.sceneRef = ref;
+                if (!Storage.sceneRef) {
+                    Storage.sceneRef = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank');
+                }
+                else {
+                    Storage.sceneRef.focus();
+                }
             }
         }
     }
