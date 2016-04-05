@@ -6,13 +6,14 @@ angular
             .accentPalette('red');
     });
 
+// settings
 angular.module('app').component('upNext', {
         template: `<div layout="row">
     <div flex="30">
         Up next   
     </div>
     <div flex="70">
-        <input ng-model="upNext">   
+        <input ng-model="upNext" ng-init="upNext = $ctrl.upNext">   
         <button class="md-button" ng-click="$ctrl.upNext = upNext">Apply</button>
     </div>
 </div>`,
@@ -44,7 +45,7 @@ angular.module('app').component('attention', {
         Attention   
     </div>
     <div flex="70">
-        <input ng-model="attention" size="45">
+        <input ng-model="attention" ng-init="attention = $ctrl.attention" size="45">
         <button class="md-button" ng-click="$ctrl.attention = attention">Apply</button>
     </div>
 </div>`,
@@ -76,7 +77,7 @@ angular.module('app').component('deadline', {
         Deadline    
     </div>
     <div flex="70">
-        <input type="text" ng-model="deadline" size="30">
+        <input type="text" ng-model="deadline" ng-init="deadline = $ctrl.deadline" size="30">
         <button class="md-button" ng-click="$ctrl.deadline = deadline">Apply</button><br>
         <code>2016-04-02T14:00:00.0200</code>    
     </div>
@@ -109,43 +110,6 @@ angular.module('app').component('deadline', {
     }
 );
 
-
-// Storage
-angular.module('app').service('Storage', function () {
-
-        function Storage() {
-            this.sceneRef = null;
-        }
-
-
-        return Storage;
-    }
-);
-
-// open scene button
-angular.module('app').component('openScene', {
-        template: `<div layout="row">
-    <div flex="30">
-        Open the scene
-    </div>
-    <div flex="70">
-        <button ng-click="$ctrl.open()" class="md-button md-primary">open!</button>       
-    </div>
-</div>`,
-        controller: function (Storage, $window) {
-            this.open = function () {
-                // if (!Storage.sceneRef) {
-                    Storage.sceneRef = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank');
-                // }
-                // else {
-                //     Storage.sceneRef.focus();
-                // }
-            }
-        }
-    }
-);
-
-
 angular.module('app').component('pause', {
         template: `<div layout="row">
     <div flex="30">
@@ -174,5 +138,42 @@ angular.module('app').component('pause', {
                 }
             })
         }
+    }
+);
+
+
+
+// open scene button
+angular.module('app').component('openScene', {
+        template: `<div layout="row">
+    <div flex="30">
+        Open the scene
+    </div>
+    <div flex="70">
+        <button ng-click="$ctrl.open()" class="md-button md-primary">open!</button>       
+    </div>
+</div>`,
+        controller: function (Storage, $window) {
+            this.open = function () {
+                // if (!Storage.sceneRef) {
+                Storage.sceneRef = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank');
+                // }
+                // else {
+                //     Storage.sceneRef.focus();
+                // }
+            }
+        }
+    }
+);
+
+// Storage
+angular.module('app').service('Storage', function () {
+
+        function Storage() {
+            this.sceneRef = null;
+        }
+
+
+        return Storage;
     }
 );

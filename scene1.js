@@ -9,9 +9,7 @@ angular
     });
 
 angular.module('app').component('upNext', {
-        template: `<span class="__upnext-text">
-                    Weird shit that looks cool, and more...
-                    </span>`,
+        template: `<span class="__upnext-text"></span>`,
         controller: function () {
             this.$onInit = function () {
                 window.addEventListener("message", receiveMessage, false);
