@@ -127,3 +127,21 @@ angular.module('app').component('sponsors', {
         }
     }
 );
+
+angular.module('app').component('attention', {
+        template: `<span class="__attention"></span>`,
+        controller: function () {
+            this.$onInit = function () {
+                window.addEventListener("message", receiveMessage, false);
+            };
+            function receiveMessage(event) {
+                if (event.data.type === "attention") {
+                    var text = event.data.text;
+                    var elem = document.querySelector(".__attention");
+                    elem.innerHTML = text;
+                }
+            }
+
+        }
+    }
+);

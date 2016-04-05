@@ -37,6 +37,37 @@ angular.module('app').component('upNext', {
     }
 );
 
+angular.module('app').component('attention', {
+        template: `<div layout="row">
+    <div flex="30">
+        Attention   
+    </div>
+    <div flex="70">
+        <input ng-model="$ctrl.attention" ng-model-options="{debounce: 3000}" size="45">    
+    </div>
+</div>`,
+        controller: function (Storage) {
+            Object.defineProperty(this, 'attention', {
+                get: function () {
+                    return localStorage.attention;
+                },
+                set: function (value) {
+                    localStorage.attention = value;
+                    if (Storage.sceneRef) {
+                        Storage.sceneRef.postMessage({
+                            type: "attention",
+                            text: this.attention
+                        }, location + 'scene1.html');
+                    }
+                    else {
+                        console.info("scene not open?");
+                    }
+                }
+            })
+        }
+    }
+);
+
 angular.module('app').component('deadline', {
         template: `<div layout="row">
     <div flex="30">
