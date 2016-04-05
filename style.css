@@ -82,3 +82,8 @@ body {
 .pause-heading {
     font-size: 4rem;
 }
+
+twitter {
+    display: block;
+    padding: 1rem;
+}

@@ -89,7 +89,7 @@ angular.module('app').component('sponsors', {
                     background-size: contain
                     "></div>`,
         controller: function () {
-            const updateMS = 5000;
+            const updateMS = 20000;
             var handle;
             var elem;
             const images = [
@@ -170,3 +170,58 @@ angular.module('app').component('pause', {
         }
     }
 );
+
+angular.module('app').component('twitter', {
+        template: `
+            <div ng-bind="$ctrl.tweet.text"></div>
+        `,
+        controller: function ($http, $interval) {
+            var self = this;
+            var hashtag = 'ngj16';
+            var index = 0;
+            var timeout = 10000;
+            var tweetList = [];
+
+            this.$onInit = function () {
+                window.addEventListener("message", receiveMessage, false);
+
+                self.fetch().then(function (data) {
+                    tweetList = data.statuses;
+                    tweetList.reverse();
+                    index = 0;
+                    next();
+                });
+            };
+
+            function next() {
+                self.tweet = tweetList[index++];
+                if (index >= tweetList.length) {
+                    index = 0;
+                }
+            }
+            $interval(next, timeout);
+
+            this.fetch = function () {
+                return $http.get('/twitter/'+hashtag).then(function (response) {
+                    return response.data;
+                });
+            };
+
+            function receiveMessage(event) {
+                if (event.data.type === "twitter") {
+                    hashtag = event.data.hashtag;
+                    self.fetch();
+                }
+            }
+
+        }
+    }
+);
+
+resizeViewPort(1280, 720);
+function resizeViewPort(width, height) {
+    window.resizeTo(
+        width + (window.outerWidth - window.innerWidth),
+        height + (window.outerHeight - window.innerHeight)
+    );
+}
