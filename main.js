@@ -37,11 +37,50 @@ angular.module('app').component('upNext', {
     }
 );
 
+angular.module('app').component('deadline', {
+        template: `<div layout="row">
+    <div flex="30">
+        Deadline    
+    </div>
+    <div flex="70">
+        <input type="text" ng-model="$ctrl.deadline" ng-model-options="{debounce: 3000}" size="30"> format: <code>2016-04-02T14:00:00.0200</code>    
+    </div>
+</div>`,
+        controller: function (Storage) {
+            const defaultDate = "2016-04-10T14:00:00.0200";
+
+            Object.defineProperty(this, 'deadline', {
+                get: function () {
+                    return localStorage.deadline;
+                },
+                set: function (value) {
+                    localStorage.deadline = value;
+
+                    var dateObj = new Date(value);
+                    if (!isNaN(dateObj.getTime())) {
+                        console.log(Storage.sceneRef)
+                        if (Storage.sceneRef) {
+                            Storage.sceneRef.postMessage({
+                                type: "deadline",
+                                date: dateObj,
+                            }, location + 'scene1.html');
+                        }
+                        else {
+                            console.info("deadline sending: scene not open?");
+                        }
+                    }
+                }
+            })
+        }
+    }
+);
+
+
 // Storage
 angular.module('app').service('Storage', function () {
 
         function Storage() {
-            this.ref = null;
+            this.sceneRef = null;
         }
 
 

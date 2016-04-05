@@ -12,14 +12,13 @@ angular.module('app').component('upNext', {
         template: `<span class="__upnext-text">
                     Weird shit that looks cool, and more...
                     </span>`,
-        controller: function ($window) {
+        controller: function () {
             this.$onInit = function () {
-                $window.addEventListener("message", receiveMessage, false);
+                window.addEventListener("message", receiveMessage, false);
                 console.log("is subscribed...");
             };
 
             function receiveMessage(event) {
-                console.log("wat", event.data);
                 if (event.data && event.data.type === "upNext") {
                     document.querySelector(".__upnext-text").innerHTML = event.data.text;    
                 }
@@ -34,7 +33,7 @@ angular.module('app').component('deadline', {
         template: `<span class="__deadline-time"></span>`,
         controller: function () {
             const updateMS = 1000;
-            var deadline = moment(new Date("2016-04-10T14:00:00.0200")); // danish local time
+            var deadline = new Date("2016-04-10T14:00:00.0200"); // danish local time
             var handle;
             var elem;
 
@@ -42,7 +41,15 @@ angular.module('app').component('deadline', {
                 elem = document.querySelector(".__deadline-time");
                 onInterval();
                 handle = setInterval(onInterval, updateMS);
+
+                window.addEventListener("message", receiveMessage, false);
             };
+
+            function receiveMessage(event) {
+                if (event.data && event.data.type === "deadline") {
+                    deadline = event.data.date;
+                }
+            }
 
             this.$onDestroy = function () {
                 clearInterval(handle);
@@ -71,7 +78,6 @@ angular.module('app').component('deadline', {
                     return hours + ":" + minutes + ":" + seconds;
                 }
                 else {
-                    clearInterval(handle);
                     return "00:00:00";
                 }
             }
