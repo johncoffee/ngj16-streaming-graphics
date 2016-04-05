@@ -14,7 +14,7 @@ angular.module('app').component('upNext', {
     </div>
     <div flex="70">
         <input ng-model="upNext" ng-init="upNext = $ctrl.upNext">   
-        <button class="md-button" ng-click="$ctrl.upNext = upNext">Apply</button>
+        <button class="md-button md-raised" ng-click="$ctrl.upNext = upNext">Apply</button>
     </div>
 </div>`,
         controller: function (Storage) {
@@ -46,7 +46,7 @@ angular.module('app').component('attention', {
     </div>
     <div flex="70">
         <input ng-model="attention" ng-init="attention = $ctrl.attention" size="45">
-        <button class="md-button" ng-click="$ctrl.attention = attention">Apply</button>
+        <button class="md-button md-raised" ng-click="$ctrl.attention = attention">Apply</button>
     </div>
 </div>`,
         controller: function (Storage) {
@@ -78,7 +78,7 @@ angular.module('app').component('deadline', {
     </div>
     <div flex="70">
         <input type="text" ng-model="deadline" ng-init="deadline = $ctrl.deadline" size="30">
-        <button class="md-button" ng-click="$ctrl.deadline = deadline">Apply</button><br>
+        <button class="md-button md-raised" ng-click="$ctrl.deadline = deadline">Apply</button><br>
         <code>2016-04-02T14:00:00.0200</code>    
     </div>
 </div>`,
@@ -150,7 +150,7 @@ angular.module('app').component('openScene', {
         Open the scene
     </div>
     <div flex="70">
-        <button ng-click="$ctrl.open()" class="md-button md-primary">open!</button>       
+        <button ng-click="$ctrl.open()" class="md-button md-raised md-primary">open!</button>       
     </div>
 </div>`,
         controller: function (Storage, $window) {
