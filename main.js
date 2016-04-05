@@ -89,7 +89,6 @@ angular.module('app').component('deadline', {
 
                     var dateObj = new Date(value);
                     if (!isNaN(dateObj.getTime())) {
-                        console.log(Storage.sceneRef)
                         if (Storage.sceneRef) {
                             Storage.sceneRef.postMessage({
                                 type: "deadline",
@@ -134,6 +133,38 @@ angular.module('app').component('openScene', {
                 var ref = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank');
                 Storage.sceneRef = ref;
             }
+        }
+    }
+);
+
+
+angular.module('app').component('pause', {
+        template: `<div layout="row">
+    <div flex="30">
+        Show pause picture   
+    </div>
+    <div flex="70">
+        <input ng-model="$ctrl.pause" type="checkbox">    
+    </div>
+</div>`,
+        controller: function (Storage) {
+            Object.defineProperty(this, 'pause', {
+                get: function () {
+                    return (localStorage.pause == 1);
+                },
+                set: function (value) {
+                    localStorage.pause = (value == 1) ? '1' : '';
+                    if (Storage.sceneRef) {
+                        Storage.sceneRef.postMessage({
+                            type: "pause",
+                            pause: !!value
+                        }, location + 'scene1.html');
+                    }
+                    else {
+                        console.info("window not open. pause");
+                    }
+                }
+            })
         }
     }
 );

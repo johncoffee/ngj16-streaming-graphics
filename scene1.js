@@ -15,7 +15,6 @@ angular.module('app').component('upNext', {
         controller: function () {
             this.$onInit = function () {
                 window.addEventListener("message", receiveMessage, false);
-                console.log("is subscribed...");
             };
 
             function receiveMessage(event) {
@@ -139,6 +138,32 @@ angular.module('app').component('attention', {
                     var text = event.data.text;
                     var elem = document.querySelector(".__attention");
                     elem.innerHTML = text;
+                }
+            }
+
+        }
+    }
+);
+
+angular.module('app').component('pause', {
+        template: `
+            <div ng-show="$ctrl.pause" style="height: 100%" layout="row" layout-align="center center">
+                <div flex="none" class="_bold">
+                    <span class="pause-heading">We will return shortly...</span>                 
+                </div>
+            </div>
+        `,
+        controller: function ($scope) {
+            this.pause = true;
+            var self = this;
+            this.$onInit = function () {
+                window.addEventListener("message", receiveMessage, false);
+            };
+            function receiveMessage(event) {
+                if (event.data.type === "pause") {
+                    $scope.$apply(function () {
+                        self.pause = !!event.data.pause;
+                    });
                 }
             }
 
