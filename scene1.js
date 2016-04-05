@@ -145,9 +145,11 @@ angular.module('app').component('attention', {
 
 angular.module('app').component('pause', {
         template: `
-            <div ng-show="$ctrl.pause" style="height: 100%" layout="row" layout-align="center center">
-                <div flex="none" class="_bold">
-                    <span class="pause-heading">We will return shortly...</span>                 
+            <div ng-show="$ctrl.pause" class="pause-box">
+                <div style="height: 100%" layout="row" layout-align="center center">
+                    <div flex="none" class="_bold">
+                        <span class="pause-heading">We will return shortly...</span>                 
+                    </div>
                 </div>
             </div>
         `,
