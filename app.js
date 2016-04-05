@@ -34,6 +34,8 @@ app.get('/twitter', function (req, res) {
     }
 });
 
-app.listen(3000, function () {
-    console.log('Listening on port 3000, not much has changed but they live on the water');
+app.use(express.static('./'));
+
+app.listen(8080, function () {
+    console.log('Listening on port 8080, not much has changed but they live on the water');
 });
