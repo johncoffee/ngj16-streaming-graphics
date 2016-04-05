@@ -134,12 +134,12 @@ angular.module('app').component('openScene', {
 </div>`,
         controller: function (Storage, $window) {
             this.open = function () {
-                if (!Storage.sceneRef) {
+                // if (!Storage.sceneRef) {
                     Storage.sceneRef = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank');
-                }
-                else {
-                    Storage.sceneRef.focus();
-                }
+                // }
+                // else {
+                //     Storage.sceneRef.focus();
+                // }
             }
         }
     }
