@@ -13,7 +13,7 @@ angular.module('app').component('upNext', {
         Up next   
     </div>
     <div flex="70">
-        <input ng-model="upNext" ng-init="upNext = $ctrl.upNext">   
+        <input ng-model="upNext" size=45 ng-init="upNext = $ctrl.upNext">   
         <button class="md-button md-raised" ng-click="$ctrl.upNext = upNext">Apply</button>
     </div>
 </div>`,
@@ -77,7 +77,7 @@ angular.module('app').component('deadline', {
         Deadline    
     </div>
     <div flex="70">
-        <input type="text" ng-model="deadline" ng-init="deadline = $ctrl.deadline" size="30">
+        <input type="text" ng-model="deadline" ng-init="deadline = $ctrl.deadline" size="45">
         <button class="md-button md-raised" ng-click="$ctrl.deadline = deadline">Apply</button><br>
         <code>2016-04-10T14:00:00.0200</code>    
     </div>
@@ -113,10 +113,10 @@ angular.module('app').component('deadline', {
 angular.module('app').component('pause', {
         template: `<div layout="row">
     <div flex="30">
-        Show pause picture   
+           
     </div>
     <div flex="70">
-        <input ng-model="$ctrl.pause" type="checkbox">    
+        <input ng-model="$ctrl.pause" type="checkbox"> Show pause screen (eg. "We'll be back..")    
     </div>
 </div>`,
         controller: function (Storage) {
@@ -145,22 +145,16 @@ angular.module('app').component('pause', {
 
 // open scene button
 angular.module('app').component('openScene', {
-        template: `<div layout="row">
-    <div flex="30">
-        Open the scene
-    </div>
-    <div flex="70">
-        <button ng-click="$ctrl.open()" class="md-button md-raised md-primary">open!</button>       
-    </div>
-</div>`,
+        template: `<button ng-click="$ctrl.open()"                           
+                           class="md-button md-raised md-primary">open scene</button>
+                    <span ng-bind="$ctrl.isConnected() ? 'Connected' : 'Disconnected'"></span>`,
         controller: function (Storage, $window) {
             this.open = function () {
-                // if (!Storage.sceneRef) {
-                Storage.sceneRef = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank');
-                // }
-                // else {
-                //     Storage.sceneRef.focus();
-                // }
+                Storage.sceneRef = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank'); // note the window dimensions of the scene is modified by the scene itself
+            };
+
+            this.isConnected = function () {
+                return !!Storage.sceneRef;
             }
         }
     }
