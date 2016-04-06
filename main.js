@@ -79,7 +79,7 @@ angular.module('app').component('deadline', {
     <div flex="70">
         <input type="text" ng-model="deadline" ng-init="deadline = $ctrl.deadline" size="30">
         <button class="md-button md-raised" ng-click="$ctrl.deadline = deadline">Apply</button><br>
-        <code>2016-04-02T14:00:00.0200</code>    
+        <code>2016-04-10T14:00:00.0200</code>    
     </div>
 </div>`,
         controller: function (Storage) {
