@@ -118,8 +118,7 @@ angular.module('app').component('sponsors', {
                 if (index >= images.length) {
                     index = 0;
                 }
-                var file = images[index];
-                elem.style.backgroundImage = `url("${file}")`;
+                elem.style.backgroundImage = `url("${images[index]}")`;
                 index += 1;
             }
         }
