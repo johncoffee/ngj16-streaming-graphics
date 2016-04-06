@@ -1,7 +1,16 @@
 # ngj16-streaming-graphics
 Set twitter stuff via environment variables.
 
-## windows
+## Installation
+
+run
+`npm install`
+and
+`bower install`
+ to install Express, AngularJS and other dependencies
+
+
+## Run on Windows
 
 Run this command to set super secret keys as environment variables, and run then node application.
 
