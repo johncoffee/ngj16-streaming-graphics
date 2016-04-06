@@ -12,25 +12,59 @@ var creds = {
 console.log(creds);
 var client = new Twitter(creds);
 
+var processedTweets = {};
+var since_id = null;
+
 var tweetsCache = null;
 setInterval(function () {
     tweetsCache = null;
-}, 60000);
+}, 10000);
 
 app.get('/twitter/:hashtag', function (req, res) {
     if (tweetsCache) {
         res.json(tweetsCache);
     }
     else {
-        client.get('search/tweets', {q: '#'+req.params.hashtag}, function(error, tweets, response){
+        var params = {
+            q: '#'+req.params.hashtag,
+        };
+        if (!since_id) {
+            params.count = 50;
+        }
+        else {
+            params.since_id = since_id;
+        }
+        client.get('search/tweets', params, function(error, data){
             if (error) {
                 res.status(500).json({
                     error: error
                 });
             }
             else {
-                tweetsCache = tweets;
-                res.json(tweets);
+                var filtered = data.statuses.filter(function (tweet) {
+                    if (!processedTweets[tweet.id_str]) {
+                        processedTweets[tweet.id_str] = true;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+                console.log ("new tweets " + filtered.length + "/" + data.statuses.length);
+                data.statuses = filtered;
+                data.statuses_orig = data.statuses;
+
+                if (!since_id) {
+                    filtered.sort(function(a, b) {
+                        return +(a.id_str > b.id_str) || +(a.id_str === b.id_str) - 1;
+                    });
+                    since_id = filtered[filtered.length-1].id_str;
+                    // console.log("largest "+ since_id)
+                    // console.log("smallest "+ filtered[0].id_str)
+                    // console.log(filtered[0].id_str < since_id);
+                }
+                tweetsCache = data;
+                res.json(data);
             }
         });
     }

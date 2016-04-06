@@ -173,44 +173,58 @@ angular.module('app').component('pause', {
 
 angular.module('app').component('twitter', {
         template: `
-            <div ng-bind="$ctrl.tweet.text"></div>
+<div>
+    <strong ng-bind="$ctrl.tweet.username"></strong>
+    <span ng-bind="$ctrl.tweet.text"></span>
+</div>
         `,
         controller: function ($http, $interval) {
             var self = this;
+            this.tweet = {};
             var hashtag = 'ngj16';
-            var index = 0;
-            var timeout = 10000;
+            const timeout = 10000;
             var tweetList = [];
 
             this.$onInit = function () {
                 window.addEventListener("message", receiveMessage, false);
-
-                self.fetch().then(function (data) {
-                    tweetList = data.statuses;
-                    tweetList.reverse();
-                    index = 0;
-                    next();
-                });
+                self.fetch().then(next);
+                $interval(next, timeout);
             };
 
             function next() {
-                self.tweet = tweetList[index++];
-                if (index >= tweetList.length) {
-                    index = 0;
+                if (tweetList.length <= 1) {
+                    self.fetch();
+                }
+                if (tweetList.length > 0) {
+                    self.tweet = tweetList.shift();
+                }
+                else {
+                    self.tweet = {};
                 }
             }
-            $interval(next, timeout);
 
             this.fetch = function () {
                 return $http.get('/twitter/'+hashtag).then(function (response) {
-                    return response.data;
+                    if (angular.isObject(response.data)) {
+                        angular.forEach(response.data.statuses, function (item) {
+                            var tweet = {
+                                text: item.text,
+                                username: item.user.name,
+                            };
+                            tweetList.push(tweet);
+                        });
+                        // tweetList.sort(function(a, b) {
+                        //     return +(a.id > b.id) || +(a.id === b.id) - 1;
+                        // });
+                        // tweetList.reverse();
+                    }
                 });
             };
 
             function receiveMessage(event) {
                 if (event.data.type === "twitter") {
                     hashtag = event.data.hashtag;
-                    self.fetch();
+                    self.fetch().then(next);
                 }
             }
 
