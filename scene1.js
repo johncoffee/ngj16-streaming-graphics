@@ -27,7 +27,7 @@ angular.module('app').component('upNext', {
 );
 
 angular.module('app').component('deadline', {
-        template: `<span class="__deadline-time"></span>`,
+        template: `<span class="__deadline-time _bold"></span>`,
         controller: function () {
             const updateMS = 1000;
             var deadline = new Date("2016-04-10T14:00:00.0200"); // danish local time
@@ -83,11 +83,12 @@ angular.module('app').component('deadline', {
 );
 
 angular.module('app').component('sponsors', {
-        template: `<div class="__sponsors" style="height: 11rem;
-                    width: 100%;
-                    background: transparent url(sponsors/IGDADKBanner.png) center center no-repeat;
-                    background-size: contain
-                    "></div>`,
+        template: `<div layout="row" layout-fill style="padding: 1rem 2rem;">
+                        <div class="__sponsors" flex="" style="                   
+                            background: transparent url(sponsors/IGDADKBanner.png) center center no-repeat;
+                            background-size: contain;
+                        "></div>
+                    </div>`,
         controller: function () {
             const updateMS = 20000;
             var handle;
@@ -101,7 +102,7 @@ angular.module('app').component('sponsors', {
                 'sponsors/SideFX_black_color.png',
                 'sponsors/AAU_Line_Blue.png'
             ];
-            var index = 0;
+            var index = Math.floor(Math.random() * images.length);
 
             this.$onInit = function () {
                 elem = document.querySelector(".__sponsors");
@@ -126,7 +127,7 @@ angular.module('app').component('sponsors', {
 );
 
 angular.module('app').component('attention', {
-        template: `<span class="__attention"></span>`,
+        template: `<span class="__attention text"></span>`,
         controller: function () {
             this.$onInit = function () {
                 window.addEventListener("message", receiveMessage, false);
