@@ -136,7 +136,11 @@ angular.module('app').component('pause', {
                         console.info("window not open. pause");
                     }
                 }
-            })
+            });
+
+            if (angular.isUndefined(localStorage.pause)) {
+                this.pause = 1; // set default value (of the scene) in localStorage
+            }
         }
     }
 );
