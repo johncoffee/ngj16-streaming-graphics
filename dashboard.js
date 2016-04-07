@@ -154,7 +154,8 @@ angular.module('app').component('openScene', {
                     <span ng-bind="$ctrl.isConnected() ? 'Connected' : 'Disconnected'"></span>`,
         controller: function (Storage, $window) {
             this.open = function () {
-                Storage.sceneRef = $window.open('scene1.html', '_blank', 'width=1280,height=720,target=_blank'); // note the window dimensions of the scene is modified by the scene itself
+                Storage.sceneRef = $window.open('scene1.html', '_blank',
+                    'width=1024,height=576,location=no,status=no,menubar=no'); // note the window dimensions of the scene is modified by the scene itself
             };
 
             this.isConnected = function () {
