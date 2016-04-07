@@ -1,3 +1,10 @@
+resizeViewPort(1024, 576);
+window.addEventListener("message", function receiveMessage(event) {
+    if (event.data && event.data.type === "resize") {
+        resizeViewPort(event.data.x, event.data.y);
+    }
+}, false);
+
 angular
     .module('app', ['ngMaterial'])
     .config(function($mdThemingProvider, $compileProvider){
@@ -232,7 +239,7 @@ angular.module('app').component('twitter', {
     }
 );
 
-resizeViewPort(1280, 720);
+
 function resizeViewPort(width, height) {
     window.resizeTo(
         width + (window.outerWidth - window.innerWidth),
