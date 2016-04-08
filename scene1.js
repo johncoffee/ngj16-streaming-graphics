@@ -102,12 +102,12 @@ angular.module('app').component('sponsors', {
             var elem;
             const images = [
                 'sponsors/IGDADKBanner.png',
+                'sponsors/AAU_Line_Blue.png',
+                'sponsors/Google_Cast_Logo.png',
+                'sponsors/UE4BlackOutlineTransparent-931x1024.png',
                 'sponsors/DanskeSpil.png',
-                'sponsors/Houdini_black_color.png',
-                'sponsors/IOI_logotype_black_TM.png',
+                'sponsors/unity-logo.png',
                 'sponsors/NordicGame2016.png',
-                'sponsors/SideFX_black_color.png',
-                'sponsors/AAU_Line_Blue.png'
             ];
             var index = Math.floor(Math.random() * images.length);
 
